@@ -36,6 +36,13 @@ public class Personne {
 	public void setDateNaissance(LocalDate dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
+
+	public boolean equals(Personne person) { 
+		boolean equal = nom.equals(person.getNom());
+		 equal = prenom.equals(person.getPrenom())  && equal;
+		 equal = dateNaissance.compareTo(person.getDateNaissance()) == 0  && equal;
+		return equal;
+	}
 	
 	
 	

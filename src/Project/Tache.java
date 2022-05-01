@@ -222,6 +222,9 @@ public class Tache {
 		executeSousTache();
 		//now task is finished 100% ==> set finished of the this task to true
 		this.finished=true;
+		System.out.println("Executing current task : "+this.toString());
+
+		
 	}
 	
 	//index of high priority not executed task

@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Projet {
+	//client
 	private Client G_Client;
+	//referent
 	private Employe Employe;
 	private ArrayList<Tache> taches;
 
@@ -65,23 +67,72 @@ public class Projet {
 		
 		
 		//getting all delayed tasks
-		public ArrayList<Tache> tacheRetard() {
-			LocalDate date = LocalDate.now();  
-			ArrayList<Tache> taches_retard = new ArrayList<Tache>();
+		//donner la liste des tâches en retard (tous projets confondus)
+		public void tacheRetard() {
+			
+			
+			System.out.println("\n========= Delayed Tasks =========");
+
+			LocalDate date = LocalDate.now();   
 			
 			for (Tache tache : taches) {
 				//comparing between task date and current date 
 				//greater that 0 proceed.
 				//also checking if the task isn't finished yet
+				/*
+				 * compareTo(LocalDate otherDate)
+				 * It returns 0 if both the dates are equal.
+				 * It returns positive value if “this date” is greater than the otherDate.
+				 * It returns negative value if “this date” is less than the otherDate. 
+				 */
 				if(tache.getDatefin().compareTo(date) < 0 && !tache.isFinished()) {
-					taches_retard.add(tache);
+					System.out.println(tache);
 				}
-			}
+			} 
 			
-			return taches_retard;
+		}
+		//donner la liste des tâches terminées par projet
+		//get all finished tasks
+		public void tachesTerminees() {
+			
+			
+			System.out.println("\n========= Finished Tasks ========="); 
+			
+			for (Tache tache : taches) { 
+				if(tache.isFinished()) {
+					System.out.println(tache);
+				}
+			} 
 			
 		}
 		
+		//donner la liste des tâches en cours pour un employé
+		//to get a progressing task we are going to check if the current date is between start date and end date of the current task 
+		//as well as checking if the first required task has already been executed (at least)
+		public void tachesEnCours(Employe emp) { 
+			
+			System.out.println("\n========= Progressing Tasks =========");
+
+			LocalDate date = LocalDate.now();   
+			
+			for (Tache tache : taches) {
+				if(tache.getEmploye().equals(emp))
+				{
+					boolean dateBetweenDebAndEndOfTask = tache.getDatefin().compareTo(date) >= 0 && tache.getDateDeb().compareTo(date) <= 0 ;
+					 
+					boolean oneRequiredTaskFinished = true  ;
+					//task contains at least one required task which has to be executed  
+					 if(!tache.getPreRequis().isEmpty()) {
+						 oneRequiredTaskFinished = tache.getPreRequis().get(0).isFinished();
+					 }
+							
+					if( dateBetweenDebAndEndOfTask && !tache.isFinished() && oneRequiredTaskFinished) {
+						System.out.println(tache);
+					}
+				}
+			} 
+			
+		}
 
 		public void afficheTaches(ArrayList<Tache> tasks) {
 
