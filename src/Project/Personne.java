@@ -1,11 +1,13 @@
 package Project;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Personne {
+public class Personne  implements Serializable {
 	private String nom;
 	private String prenom;
-	private LocalDate dateNaissance;
+	private LocalDate dateNaissance; 
+	
 	
 	public Personne(String nom, String prenom, LocalDate dateNaissance) {
 		this.nom=nom;

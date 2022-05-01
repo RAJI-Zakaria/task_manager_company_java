@@ -1,9 +1,10 @@
 package Project;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Tache {
+public class Tache  implements Serializable{
 	private String titre;
 	private String description;
 	private LocalDate dateDeb;
@@ -195,7 +196,8 @@ public class Tache {
 			//					-task2 --> require(task3)  EXECUTE TASK 3 THEN 2 
 			//										-task3 --> require(task4)  EXECUTE TASK 4 THEN 1 
 			
-			tache.executePreRequisTache();
+			//tache.executePreRequisTache()
+			tache.execute();
 			//THIS is going to set the finished property of each nested required task to true
 			tache.finished();
 			System.out.println("Executing requirements : "+tache);
@@ -218,12 +220,11 @@ public class Tache {
 		
 		 //first execute the required tasks ()sorted based on priority attribute
 		executePreRequisTache();
-		//second execute the sub tasks (it doesn't matter the order)
+		//second execute the sub tasks (the order doesn't matter)
 		executeSousTache();
 		//now task is finished 100% ==> set finished of the this task to true
 		this.finished=true;
-		System.out.println("Executing current task : "+this.toString());
-
+ 
 		
 	}
 	

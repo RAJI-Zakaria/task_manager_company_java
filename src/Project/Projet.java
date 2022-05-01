@@ -1,9 +1,10 @@
 package Project;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Projet {
+public class Projet implements Serializable {
 	//client
 	private Client G_Client;
 	//referent
@@ -109,7 +110,7 @@ public class Projet {
 		//donner la liste des tâches en cours pour un employé
 		//to get a progressing task we are going to check if the current date is between start date and end date of the current task 
 		//as well as checking if the first required task has already been executed (at least)
-		public void tachesEnCours(Employe emp) { 
+		public void tachesEnCours(Employe emp) {
 			
 			System.out.println("\n========= Progressing Tasks =========");
 

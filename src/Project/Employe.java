@@ -1,5 +1,6 @@
 package Project;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Employe extends Personne {
